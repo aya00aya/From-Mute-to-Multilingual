@@ -28,11 +28,14 @@ export default function CallRoom(p: Props) {
   // Set the key BEFORE connecting, otherwise early frames can't be decrypted.
   useEffect(() => {
     if (p.mode !== "e2ee" || !p.e2eeKey) return;
-    keyProvider.setKey(p.e2eeKey).then(() => room.setE2EEEnabled(true)).then(() => setReady(true));
+       keyProvider.setKey(p.e2eeKey).then(() => room.setE2EEEnabled(true)).then(() => setReady(true)).catch((err) => alert("E2EE Error: " + err.message));
   }, [p.mode, p.e2eeKey, keyProvider, room]);
 
   return (
-    <LiveKitRoom room={room} token={p.token} serverUrl={p.url} connect={ready} audio video onDisconnected={p.onLeave} data-lk-theme="default">
+         <LiveKitRoom room={room} token={p.token} serverUrl={p.url} connect={ready} audio video 
+        onDisconnected={(reason) => { alert("Disconnected. Reason: " + reason); p.onLeave(); }} 
+        onError={(error) => { alert("LiveKit Connection Error: " + error.message); }}
+        data-lk-theme="default">
       <CallStage
         code={p.code} name={p.name} lang={p.lang} mode={p.mode}
         captionsAllowed={p.mode === "translation" && p.scope.includes("processing")}
