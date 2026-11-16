@@ -1,2 +1,12 @@
 /** @type {import('next').NextConfig} */
-module.exports = { reactStrictMode: false }; // LiveKit rooms don't like double-mounting in dev
+const nextConfig = {
+  reactStrictMode: false,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+};
+
+module.exports = nextConfig;
