@@ -15,10 +15,11 @@ export async function POST(req: Request) {
     if (!consented) return NextResponse.json({ error: "Consent required" }, { status: 403 });
   }
 
-  const at = new AccessToken(process.env.LIVEKIT_API_KEY!, process.env.LIVEKIT_API_SECRET!, {
+    const at = new AccessToken(process.env.LIVEKIT_API_KEY!, process.env.LIVEKIT_API_SECRET!, {
     identity: userId,
     name,
-    ttl: "10m", // Changed from 2h to 10m. LiveKit rejects tokens longer than 10 minutes by default.
+    ttl: "10m",
+    nbf: Math.floor(Date.now() / 1000) - 30, // Tolerates minor clock drift
     attributes: { lang: String(lang), mode: String(mode), role: isHost ? "host" : "guest" },
   });
   
