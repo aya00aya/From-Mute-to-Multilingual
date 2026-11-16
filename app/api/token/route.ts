@@ -25,13 +25,12 @@ export async function POST(req: Request) {
   at.addGrant({ room: roomId, roomJoin: true, canPublish: true, canSubscribe: true, canPublishData: true });
 
   // This tells LiveKit to send your Python Translation Agent into the room
-  at.roomConfig = {
-    agents: [{
-      agentName: "my-translator-agent", // Make sure this matches your deployed agent name EXACTLY
-      metadata: JSON.stringify({ targetLang: lang })
-    }]
-  };
-
+ // at.roomConfig = {
+  //   agents: [{
+  //     agentName: "my-translator-agent",
+  //     metadata: JSON.stringify({ targetLang: lang })
+  //   }]
+  // };
   // NOTE: "isHost" comes from the client. Fine for a demo; for production,
   // store the host's identity at room creation and verify it here.
   return NextResponse.json({ token: await at.toJwt(), url: process.env.LIVEKIT_URL });
