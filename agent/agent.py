@@ -41,7 +41,8 @@ async def entrypoint(ctx: JobContext):
         agent=TranslatorAgent(),
         room=ctx.room,
     )
-    await ctx.connect(name="Polyglot AI")
+    await ctx.connect()
+    await ctx.room.local_participant.set_name("Polyglot AI")
 
 if __name__ == "__main__":
     cli.run_app(server)
