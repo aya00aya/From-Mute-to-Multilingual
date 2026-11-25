@@ -45,7 +45,7 @@ export function CallStage(props: {
 
       <ControlBar onLeave={props.onLeave} />
       {/* Plays everyone's audio. In M3 we mute the raw host audio for listeners and play the translated track instead. */}
-      {/* <RoomAudioRenderer /> */}
+           <RoomAudioRenderer />
     </main>
   );
 }
