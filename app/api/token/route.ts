@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     attributes: { lang: String(lang), mode: String(mode), role: isHost ? "host" : "guest" },
   });
   
-  at.addGrant({ room: roomId, roomJoin: true, canPublish: true, canSubscribe: true, canPublishData: true });
+    at.addGrant({ room: roomId, roomJoin: true, canPublish: true, canSubscribe: true, canPublishData: true, canUpdateOwnMetadata: true });
 
   at.roomConfig = {
     agents: [{
