@@ -27,7 +27,7 @@ export async function POST(req: Request) {
 
   at.roomConfig = {
     agents: [{
-      agentName: "YOUR-AGENT-NAME-HERE", // <--- PASTE THE NAME HERE (keep the quotes)
+    agentName: "my-translator-agent",
       metadata: JSON.stringify({ targetLang: lang })
     }]
   };
